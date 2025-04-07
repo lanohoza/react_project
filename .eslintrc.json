@@ -1,0 +1,9 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react-hooks/exhaustive-deps": 0,
+    "next/no-css-tags": "off",
+    "react/jsx-key": "off",
+    "@next/next/no-page-custom-font":"off"
+  }
+}

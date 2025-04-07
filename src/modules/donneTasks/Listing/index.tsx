@@ -1,0 +1,72 @@
+'use client';
+import React, { useEffect, useState } from 'react';
+import AppsHeader from '@crema/components/AppsContainer/AppsHeader';
+import AppsContent from '@crema/components/AppsContainer/AppsContent';
+import { Button, Col, Input, Modal, Row, Select } from 'antd';
+import {
+  StyledListFooterPagination,
+  StyledListHeader,
+  StyledListHeaderInputView,
+  StyledListHeaderLeft,
+  StyledListHeaderPagination,
+  StyledListHeaderRight,
+} from '@core/styles/list/index.styled';
+//import { StyledLinkBtn } from '../Confirmation/index.styled';
+import TaskListTable from './ListingTable';
+import { useDonneTaskActionsContext, useDonneTaskContext } from '../DonneTaskContextProvider';
+
+
+const YearProgramList = () => {
+  const {donneTaskPage,page} = useDonneTaskContext();
+  const {onChangePage,onSearch} = useDonneTaskActionsContext();
+
+  return (
+    <>
+
+      <AppsHeader key={'wrap'}>
+
+        <StyledListHeader>
+          <StyledListHeaderLeft>
+            <StyledListHeaderInputView>
+              <Input
+                id='user-name'
+                placeholder='ابحث'
+                type='search'
+                onChange={onSearch}
+              />
+            </StyledListHeaderInputView>
+
+          </StyledListHeaderLeft>
+          <StyledListHeaderRight>
+
+
+            <StyledListHeaderPagination
+              pageSize={10}
+              count={donneTaskPage?.totalElements}
+              page={page}
+              onChange={onChangePage}
+            />
+          </StyledListHeaderRight>
+        </StyledListHeader>
+      </AppsHeader>
+
+      <AppsContent
+        style={{
+          paddingTop: 10,
+          paddingBottom: 10,
+        }}
+      >
+        <TaskListTable/>
+      </AppsContent>
+
+      <StyledListFooterPagination
+        pageSize={10}
+        count={donneTaskPage?.totalElements}
+        page={page}
+        onChange={onChangePage}
+      />
+    </>
+  );
+};
+
+export default YearProgramList;
